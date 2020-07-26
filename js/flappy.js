@@ -20,6 +20,15 @@ function MenuInicial() {
     this.elemento.appendChild(botaoComecar)
 }
 
+function MenuFinal() {
+    this.elemento = novoElemento('div', 'menu')
+
+    const subTitulo = novoElementoTexto('h2', 'subtitulo', 'Voce perdeu!')
+    const botaoComecar = novoElementoTexto('button', 'finish', 'Jogar novamente')
+    this.elemento.appendChild(subTitulo)
+    this.elemento.appendChild(botaoComecar)
+}
+
 function Barreira(reversa = false) {
     this.elemento = novoElemento('div', 'barreira')
 
@@ -142,6 +151,7 @@ function colidiu(passaro, barreiras) {
 
 function FlappyBird() {
     let pontos = 0
+    let perdeu = false
 
     const areaDoJogo = document.querySelector('[wm-flappy]')
     const altura = areaDoJogo.clientHeight
@@ -151,6 +161,7 @@ function FlappyBird() {
     const barreiras = new Barreiras(altura, largura, 200, 400, () => progresso.atualizarPontos(++pontos))
     const passaro = new Passaro(altura)
     const menuInicio = new MenuInicial()
+    const menuFinal = new MenuFinal()
 
     areaDoJogo.appendChild(menuInicio.elemento)
     areaDoJogo.appendChild(progresso.elemento)
@@ -158,8 +169,8 @@ function FlappyBird() {
     barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 
     this.comecar = () => {
-        const submit = document.querySelector('.start')
-        submit.onclick = function(e) {
+        const comecar = document.querySelector('.start')
+        comecar.onclick = function(e) {
             const remover = e.target.parentNode
             areaDoJogo.removeChild(remover)
 
@@ -169,6 +180,13 @@ function FlappyBird() {
 
                 if (colidiu(passaro, barreiras)) {
                     clearInterval(temporizador)
+
+                    areaDoJogo.appendChild(menuFinal.elemento)
+                    const reiniciar = document.querySelector('.finish')
+                    reiniciar.onclick = function(e) {
+                        window.location.reload()
+                        return false
+                    }
                 }
             }, 20)
         }
@@ -177,3 +195,14 @@ function FlappyBird() {
 
 let flappyBird = new FlappyBird()
 flappyBird.comecar()
+
+
+
+// this.terminar = () => {
+//     areaDoJogo.appendChild(menuFinal.elemento)
+//     const reiniciar = document.querySelector('.finish')
+//     reiniciar.onclick = function(e) {
+//         window.location.reload()
+//         return false
+//     }
+// }

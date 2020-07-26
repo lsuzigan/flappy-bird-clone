@@ -1,11 +1,11 @@
 * {
     box-sizing: border-box;
-    font-family: 'Pixel';
+    font-family: 'FingerPaint-Regular';
 }
 
 @font-face {
-    font-family: 'Pixel';
-    src: url('../fonts/Pixel.ttf');
+    font-family: 'FingerPaint-Regular';
+    src: url('../fonts/FingerPaint-Regular.ttf');
 }
 
 [wm-flappy] {
@@ -44,16 +44,34 @@
 
 .start {
     height: 45px;
-    width: 120px;
-    font-size: 30px;
+    width: 70%;
+    font-size: 20px;
     color: white;
     background-color: black;
     border: none;
     border-radius: 10px;
     margin-bottom: 30px;
+    align-items: center;
+}
+
+.finish {
+    height: 45px;
+    width: 70%;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    align-items: center;
 }
 
 .start:hover {
+    background-color: rgba(41, 41, 41, 0.932);
+    cursor: pointer;
+}
+
+.finish:hover {
     background-color: rgba(41, 41, 41, 0.932);
     cursor: pointer;
 }
@@ -98,7 +116,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-family: 'Pixel';
+    font-family: 'FingerPaint-Regular';
     font-size: 70px;
     z-index: 100;
 }
